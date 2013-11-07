@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         watch: {
             js: {
                 files: [
-                    config.dir.app + '/**/*.js', 
+                    './**/*.js', 
                     "!" + config.dir.vendor + "**", 
                     '!**/node_modules/**'
                 ],
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
             ],
             test: [
                 config.dir.test + '/**/*.js', 
-                config.dir.app + '/**/*.spec.js', 
+                './**/*.spec.js', 
                 config.dir.public + '/**/*.spec.js'
             ]
         },
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
                     args: [],
                     ignoredFiles: ['README.md', 'node_modules/**', config.dir.vendor + '/**', '.DS_Store'],
                     watchedExtensions: ['js'],
-                    watchedFolders: ['app', 'config', 'public'],
+                    watchedFolders: ['config', 'public'],
                     debug: true,
                     delayTime: 1,
                     env: {

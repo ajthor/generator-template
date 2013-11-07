@@ -17,16 +17,15 @@ util.inherits(Generator, GeneratorBase);
 Generator.prototype.setDirectories = function setDirectories() {
 	// Set default directory structure.
 	this.dir = {
-		app:            "app",
-		appviews:       "app/views",
-		approutes:      "app/routes",
 		// Public directories.
+		// NOTE: If you want to rename the variables, be sure to modify: 
+		// the 3 generators, generator-base, and the templates.
 		public:         "public",
-		images:         "public/img",
+		images:         "public/images",
 		styles:         "public/styles",
 		scripts:        "public/scripts",
 		vendor:         "public/scripts/vendor",
-		publicviews:    "public/views",
+		views:          "public/views",
 		// Other directories.
 		config:         "config",
 		test:           "test",
