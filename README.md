@@ -2,6 +2,9 @@
 
 This is a template generator to use in Yeoman projects that require a little extra oomph.
 
+## How to use:
+Clone the git repo into your current working directory and link the generator to npm using: `npm link` in order to test it in your console. See the Yeoman generator tutorial for instructions.
+
 List of generators:
 
 - app (main)
@@ -15,9 +18,9 @@ List of possible options to use:
 ## app
     yo <your generator name>
 Generator responsible for setting the configuration options for the project. Gets input from the user about what sort of features the user would like to include and adds them to the stack. Possible to include:
-    - AMD Support
-    - Twitter Bootstrap
-    - etc.
+- AMD Support
+- Twitter Bootstrap
+- etc.
 
 *NOTE: The value of the prompts is the name of the package to install.*
 
@@ -55,33 +58,33 @@ Generator responsible for creating application specific files and config such as
 
 
 ## Instructions for use:
-    - Modify the 3 main generators (app, boilerplate, and common) to reference the components, directory structure, and configuration options, respectively, that you wish to use. 
-    - Any global options or functions can be added to: generator-base.js
-    - Add any templates to the templates folder. Templates in *'templates/boilerplate'* will be copied to the target directory __AS IS__.
+- Modify the 3 main generators (app, boilerplate, and common) to reference the components, directory structure, and configuration options, respectively, that you wish to use. 
+- Any global options or functions can be added to: generator-base.js
+- Add any templates to the templates folder. Templates in *'templates/boilerplate'* will be copied to the target directory __AS IS__.
 
 ### generator-base.js
 This file contains a small complementary API to files created with Yeoman generators. It contains functions which I found necessary in my projects, but which were not available immediately in the standard Yeoman base API. This file is under constant development and changes from day to day. Be sure to check the current API and modify your projects accordingly.
 
 #### Current API:
-    - getBowerConfig
-    - getPackageConfig
-    - getConfigFile
-    - setConfigFile
-    - showConfig
-    - pushToConfig
-    - removeFromConfig
+- getBowerConfig
+- getPackageConfig
+- getConfigFile
+- setConfigFile
+- showConfig
+- pushToConfig
+- removeFromConfig
 
-    - getTemplate
-    - parseTemplate
+- getTemplate
+- parseTemplate
 
-    - writeSpec
-    - writeModule
+- writeSpec
+- writeModule
 
-    - promptForModuleValues
-    - createModule
-    - buildModule
-    - validateModule
-    
-    - removeScriptTag
-    - wireScriptsToFile
-    - appendScriptsToFile
+- promptForModuleValues
+- createModule
+- buildModule
+- validateModule
+
+- removeScriptTag
+- wireScriptsToFile
+- appendScriptsToFile
