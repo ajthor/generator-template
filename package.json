@@ -1,0 +1,40 @@
+{
+  "name": "generator-template",
+  "version": "0.0.0",
+  "description": "A template for generators built with Yeoman",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "homepage": "https://github.com/ajthor/generator-template",
+  "bugs": "https://github.com/ajthor/generator-template/issues",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": "https://github.com/ajthor"
+  },
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ajthor/generator-template.git"
+  },
+  "dependencies": {
+    "yeoman-generator": "~0.13.0",
+    "async": "~0.2.9",
+    "lodash": "~2.2.1",
+    "cheerio": "~0.12.3"
+  },
+  "devDependencies": {
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0-rc.1.1"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.2.10"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
