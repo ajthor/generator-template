@@ -1,18 +1,16 @@
 'use strict';
 var util = require('util');
 var path = require('path');
-var yeoman = require('yeoman-generator');
-
-var GeneratorBase = require('../generator-base.js');
+var GeneratorMain = require('./lib/generator-main.js');
 
 var _ = require('lodash');
 
 var Generator = module.exports = function Generator(args, options, config) {
-	GeneratorBase.apply(this, arguments);
+	GeneratorMain.apply(this, arguments);
 
 };
 
-util.inherits(Generator, GeneratorBase);
+util.inherits(Generator, GeneratorMain);
 
 Generator.prototype.setDirectories = function setDirectories() {
 	// Set default directory structure.
@@ -21,23 +19,27 @@ Generator.prototype.setDirectories = function setDirectories() {
 		// NOTE: If you want to rename the variables, be sure to modify: 
 		// the 3 generators, generator-base, and the templates.
 		public:         "public",
-		images:         "public/images",
-		styles:         "public/styles",
-		scripts:        "public/scripts",
-		vendor:         "public/scripts/vendor",
-		views:          "public/views",
 		// Other directories.
 		config:         "config",
 		test:           "test",
-		specs:          "test/specs",
 		build:          "build",
 	};
+
+	this.dir = _.extend(this.dir, {
+		images:         path.join(this.dir.public, "/images"),
+		styles:         path.join(this.dir.public, "/styles"),
+		scripts:        path.join(this.dir.public, "/scripts"),
+		vendor:         path.join(this.dir.public, "/scripts/vendor"),
+		views:          path.join(this.dir.public, "/views"),
+	});
 	// Set 'development' directories.
 	this.dev = {
-		templates:      path.join(this.sourceRoot(), '../../templates')
+		templates:      path.join(this.sourceRoot(), '../../templates'),
+		boilerplate:    path.join(this.sourceRoot(), '../../templates/boilerplate'),
+		common:         path.join(this.sourceRoot(), '../../templates/common')
 	};
-	// These options will be available in any generator inheriting from generator-base.
-	// Just use this.directories or this.dev
+	// These options will be available in any generator inheriting from base generator.
+	// Just use this.dir or this.dev
 };
 
 Generator.prototype.makeDirectories = function makeDirectories() {
@@ -48,14 +50,16 @@ Generator.prototype.makeDirectories = function makeDirectories() {
 };
 
 Generator.prototype.saveConfiguration = function saveConfiguration() {
+	// Save configuration to file.
 	this.config.set("dir", this.dir);
 	this.config.set("dev", this.dev);
-
+	// Force save so that it can be used in the next generator.
 	this.config.forceSave();
 };
 
 Generator.prototype.copyBoilerplateFiles = function copyBoilerplateFiles() {
-	this.directory(this.dev.templates + 'boilerplate', this.destinationRoot());
+	// Copy entire boilerplate template folder to the destination directory.
+	this.directory(this.dev.boilerplate, this.destinationRoot());
 };
 
 

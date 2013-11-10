@@ -3,79 +3,121 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
-var GeneratorBase = require('../generator-base.js');
+var proxy = process.env.http_proxy || process.env.HTTP_PROXY || process.env.https_proxy || process.env.HTTPS_PROXY || null;
+var githubOptions = {
+  version: '3.0.0'
+};
 
-var _ = require('lodash');
+if (proxy) {
+  githubOptions.proxy = {};
+  githubOptions.proxy.host = url.parse(proxy).hostname;
+  githubOptions.proxy.port = url.parse(proxy).port;
+}
 
-var Generator = module.exports = function Generator(args, options, config) {
-	GeneratorBase.apply(this, arguments);
+var GitHubApi = require('github');
+var github = new GitHubApi(githubOptions);
 
-	this.hookFor('mean:boilerplate', {
-		args: args,
-		options: {
-			options: {
-				"dont-ask": this.options["dont-ask"] || true
-			}
-		}
-	});
+var extractGeneratorName = function (_, appname) {
+  var slugged = _.slugify(appname),
+    match = slugged.match(/^generator-(.+)/);
 
-	this.hookFor('mean:common', {
-		args: args,
-		options: {
-			options: {
+  if (match && match.length === 2) {
+    return match[1].toLowerCase();
+  }
 
-			}
-		}
-	});
+  return slugged;
+};
+
+var githubUserInfo = function (name, cb) {
+  github.user.getFrom({
+    user: name
+  }, function (err, res) {
+    if (err) {
+      throw err;
+    }
+    cb(JSON.parse(JSON.stringify(res)));
+  });
+};
+
+var TemplateGenerator = module.exports = function TemplateGenerator(args, options, config) {
+	yeoman.generators.Base.apply(this, arguments);
 
 	this.on('end', function () {
 		this.installDependencies({ skipInstall: options['skip-install'] });
 	});
 
+	this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
-util.inherits(Generator, GeneratorBase);
+util.inherits(TemplateGenerator, yeoman.generators.Base);
 
-Generator.prototype.askFor = function askFor() {
-	// If the argument 'dont-ask' was set, return.
-	if(this.options["dont-ask"]===true) return;
-
-	// have Yeoman greet the user.
-	console.log(this.yeoman);
-
-	var done = this.async();
+TemplateGenerator.prototype.askFor = function askFor() {
+	var cb = this.async();
+	var generatorName = extractGeneratorName(this._, this.appname);
 
 	var prompts = [{
-		type: 'checkbox',
-		name: 'components',
-		message: "What else would you like?",
-		choices: [
-		// Add new component choices here in this array.
-		// 'value' is the name of the library to include in the bower config file.
-		{
-			name: 'RequireJS Support',
-			value: 'requirejs',
-			checked: true
-		}]
+		name: 'githubUser',
+		message: 'Would you mind telling me your username on GitHub?',
+		default: 'someuser'
+	}, {
+		name: 'generatorName',
+		message: 'What\'s the base name of your generator?',
+		default: generatorName
 	}];
 
-	this.prompt(prompts, function (results) {
-		// Set components to an empty array.
-		this.components = [];
-		// Add components which the user selected.
-		_.each(results.components, function (component) {
-			this.components.push(component);
-		}, this);
-		// And send the components to the configuration file.
-		this.config.set("components", this.components);
-		this.config.forceSave();
+	this.prompt(prompts, function (props) {
+		this.githubUser = props.githubUser;
+    
+		this.generatorName = props.generatorName;
+		this.appname = 'generator-' + this.generatorName;
 
-		// WARNING: Need this async 'done' call to ensure hooks work???
-		done();
+		cb();
 	}.bind(this));
-
-
 };
 
 
+TemplateGenerator.prototype.userInfo = function userInfo() {
+	var done = this.async();
 
+	githubUserInfo(this.githubUser, function (res) {
+		/*jshint camelcase:false */
+		this.realname = res.name;
+		this.email = res.email;
+		this.githubUrl = res.html_url;
+		done();
+	}.bind(this));
+};
+
+TemplateGenerator.prototype.copyProjectFiles = function copyProjectFiles() {
+	this.template('LICENSE');
+	this.template('_package.json', 'package.json');
+
+	this.template('README.md');
+
+	this.copy('gitignore', '.gitignore');
+};
+
+TemplateGenerator.prototype.makeDirectories = function makeDirectories() {
+	this.mkdir('app');
+	this.mkdir('boilerplate');
+	this.mkdir('common');
+	this.mkdir('lib');
+	this.mkdir('lib/util');
+	this.mkdir('templates');
+	this.mkdir('templates/boilerplate');
+	this.mkdir('templates/common');
+};
+
+TemplateGenerator.prototype.copyBaseGenerators = function copyBaseGenerators() {
+	this.template('app/index.js',         'app/index.js');
+	this.template('boilerplate/index.js', 'boilerplate/index.js');
+	this.template('common/index.js',      'common/index.js');
+};
+
+TemplateGenerator.prototype.copyLibraryDirectory = function copyLibraryDirectory() {
+	this.directory('lib', path.join(this.destinationRoot(), 'lib'));
+};
+
+TemplateGenerator.prototype.copyTemplatesDirectory = function copyTemplatesDirectory() {
+	this.directory('templates', path.join(this.destinationRoot(), 'templates'));
+};

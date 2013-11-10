@@ -1,4 +1,4 @@
-# generator-template [![Build Status](https://secure.travis-ci.org/ajthor/generator-template.png?branch=master)](https://travis-ci.org/ajthor/generator-template)
+# <%= appname %> [![Build Status](https://secure.travis-ci.org/<%= githubUser %>/<%= _.slugify(appname) %>.png?branch=master)](https://travis-ci.org/<%= githubUser %>/<%= _.slugify(appname) %>)
 
 A generator for [Yeoman](http://yeoman.io).
 
@@ -23,16 +23,16 @@ $ npm install -g yo
 
 Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
 
-To install generator-template from npm, run:
+To install <%= appname %> from npm, run:
 
 ```
-$ npm install -g generator-template
+$ npm install -g <%= _.slugify(appname) %>
 ```
 
 Finally, initiate the generator:
 
 ```
-$ yo template
+$ yo <%= generatorName %>
 ```
 
 ### Getting To Know Yeoman

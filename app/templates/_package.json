@@ -1,6 +1,6 @@
 {
-  "name": "generator-template",
-  "version": "0.1.0",
+  "name": "generator-<%= generatorName %>",
+  "version": "0.0.0",
   "description": "A custom template for generators built with Yeoman",
   "keywords": [
     "yeoman-generator",
@@ -23,8 +23,10 @@
     "test": "mocha"
   },
   "dependencies": {
-    "github": "~0.1.8",
-    "yeoman-generator": "~0.13.0"
+    "yeoman-generator": "~0.13.0",
+    "async": "~0.2.9",
+    "lodash": "~2.2.1",
+    "cheerio": "~0.12.3"
   },
   "devDependencies": {
     "mocha": "~1.12.0"
