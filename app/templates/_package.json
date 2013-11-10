@@ -1,23 +1,21 @@
 {
-  "name": "generator-<%= generatorName %>",
+  "name": "<%= _.slugify(appname) %>",
   "version": "0.0.0",
   "description": "A custom template for generators built with Yeoman",
   "keywords": [
-    "yeoman-generator",
-    "yeoman",
-    "generator"
+    "yeoman-generator"
   ],
-  "homepage": "https://github.com/ajthor/generator-template",
-  "bugs": "https://github.com/ajthor/generator-template/issues",
+  "homepage": "<%= githubUrl %>/<%= _.slugify(appname) %>",
+  "bugs": "<%= githubUrl %>/<%= _.slugify(appname) %>/issues",
   "author": {
-    "name": "",
-    "email": "",
-    "url": "https://github.com/ajthor"
+    "name": "<%= realname %>",
+    "email": "<%= email %>",
+    "url": "<%= githubUrl %>"
   },
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ajthor/generator-template.git"
+    "url": "git://github.com/<%= githubUser %>/<%= _.slugify(appname) %>.git"
   },
   "scripts": {
     "test": "mocha"
