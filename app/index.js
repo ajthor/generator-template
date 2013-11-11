@@ -129,6 +129,5 @@ TemplateGenerator.prototype.copyTemplatesDirectory = function copyTemplatesDirec
 	this.copy('templates/boilerplate/styles/main.css');
 
 	this.copy('templates/common/Gruntfile.js');
-	this.copy('templates/common/config/module.js');
 	this.copy('templates/common/index.html');
 };
