@@ -10,6 +10,9 @@ var pattern = {
     },
     styles: {
         all: path.join(config.dir.styles, '/**/*.css')
+    },
+    not: {
+        vendor: "!" + path.join(config.dir.vendor, '/**/*.js')
     }
 };
 
@@ -34,7 +37,7 @@ module.exports = function(grunt) {
             js: {
                 files: [
                     pattern.js.all, 
-                    "!" + pattern.js.vendor, 
+                    pattern.not.vendor,
                     '!**/node_modules/**'
                 ],
                 tasks: ['jshint'],
@@ -76,8 +79,8 @@ module.exports = function(grunt) {
                 'Gruntfile.js'
             ],
             public: [
-                pattern.js.all, 
-                "!" + pattern.js.vendor
+                pattern.js.all,
+                pattern.not.vendor
             ],
             test: [
                 pattern.js.test, 
