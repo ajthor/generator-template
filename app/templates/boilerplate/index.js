@@ -1,7 +1,7 @@
 'use strict';
 var util = require('util');
 var path = require('path');
-var GeneratorMain = require('./lib/generator-main.js');
+var GeneratorMain = require('../lib/generator-main.js');
 
 var _ = require('lodash');
 
@@ -58,8 +58,16 @@ Generator.prototype.saveConfiguration = function saveConfiguration() {
 };
 
 Generator.prototype.copyBoilerplateFiles = function copyBoilerplateFiles() {
-	// Copy entire boilerplate template folder to the destination directory.
-	this.directory(this.dev.boilerplate, this.destinationRoot());
+	this.copy(path.join(this.dev.boilerplate, 'LICENSE'));
+	this.template(path.join(this.dev.boilerplate, 'README.md'));
+	this.copy(path.join(this.dev.boilerplate, 'gitignore'), '.gitignore');
+
+	this.copy(path.join(this.dev.boilerplate, 'public/404.html'), path.join(this.dir.public, '404.html'));
+	this.copy(path.join(this.dev.boilerplate, 'public/favicon.ico'), path.join(this.dir.public, 'favicon.ico'));
+	this.copy(path.join(this.dev.boilerplate, 'public/robots.txt'), path.join(this.dir.public, 'robots.txt'));
+	this.copy(path.join(this.dev.boilerplate, 'public/styles/main.css'), path.join(this.dir.styles, 'main.css'));
+
+	this.copy(path.join(this.dev.boilerplate, 'public/scripts/app.js'), path.join(this.dir.scripts, 'app.js'));
 };
 
 

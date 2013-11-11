@@ -109,15 +109,25 @@ TemplateGenerator.prototype.makeDirectories = function makeDirectories() {
 };
 
 TemplateGenerator.prototype.copyBaseGenerators = function copyBaseGenerators() {
-	this.template('app/index.js',         'app/index.js');
-	this.template('boilerplate/index.js', 'boilerplate/index.js');
-	this.template('common/index.js',      'common/index.js');
+	this.template('app/index.js');
+	this.template('boilerplate/index.js');
+	this.template('common/index.js');
 };
 
 TemplateGenerator.prototype.copyLibraryDirectory = function copyLibraryDirectory() {
-	this.directory('lib', path.join(this.destinationRoot(), 'lib'));
+	this.copy('lib/generator-main.js');
+	this.copy('lib/util/config.js');
+	this.copy('lib/util/express.js');
+	this.copy('lib/util/module.js');
+	this.copy('lib/util/requirejs.js');
 };
 
 TemplateGenerator.prototype.copyTemplatesDirectory = function copyTemplatesDirectory() {
-	this.directory('templates', path.join(this.destinationRoot(), 'templates'));
+	this.copy('templates/boilerplate/public/404.html');
+	this.copy('templates/boilerplate/public/robots.txt');
+	this.copy('templates/boilerplate/public/favicon.ico');
+	this.copy('templates/boilerplate/public/styles/main.css');
+
+	this.copy('templates/common/Gruntfile.js');
+	this.copy('templates/common/index.html');
 };
