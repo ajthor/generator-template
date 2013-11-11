@@ -77,7 +77,16 @@ Generator.prototype.setGeneralConfig = function setGeneralConfig() {
 };
 
 Generator.prototype.copyGruntfile = function copyGruntfile() {
-	this.template(path.join(this.dev.templates, 'common/Gruntfile.js'), 'Gruntfile.js');
+	this.template(path.join(this.dev.common, 'Gruntfile.js'), 'Gruntfile.js');
+};
+
+Generator.prototype.makeIndexfile = function makeIndexfile() {
+	var scripts = ['scripts/app.js'];
+	this.indexFile = this.readFileAsString(path.join(this.dev.common, 'index.html'));
+	this.indexFile = this.engine(this.indexFile, this);
+
+	this.indexFile = this.appendScripts(this.indexFile, path.join(this.dir.scripts, 'main.js'), scripts);
+	this.write(path.join(this.dir.public, 'index.html'), this.indexFile);
 };
 
 
