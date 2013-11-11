@@ -58,10 +58,6 @@ Generator.prototype.saveConfiguration = function saveConfiguration() {
 };
 
 Generator.prototype.copyBoilerplateFiles = function copyBoilerplateFiles() {
-	this.copy(path.join(this.dev.boilerplate, 'server.js'), 'server.js');
-	this.copy(path.join(this.dev.boilerplate, 'routes.js'), 'routes.js');
-	this.copy(path.join(this.dev.boilerplate, 'routes/index.js'), 'routes/index.js');
-
 	this.copy(path.join(this.dev.boilerplate, 'public/404.html'), path.join(this.dir.public, '404.html'));
 	this.copy(path.join(this.dev.boilerplate, 'public/favicon.ico'), path.join(this.dir.public, 'favicon.ico'));
 	this.copy(path.join(this.dev.boilerplate, 'public/robots.txt'), path.join(this.dir.public, 'robots.txt'));
