@@ -1,7 +1,7 @@
 'use strict';
 var util = require('util');
 var path = require('path');
-var GeneratorMain = require('./lib/generator-main.js');
+var GeneratorMain = require('../lib/generator-main.js');
 
 var _ = require('lodash');
 

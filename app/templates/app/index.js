@@ -32,7 +32,7 @@ var Generator = module.exports = function Generator(args, options, config) {
 
 };
 
-util.inherits(TemplateGenerator, yeoman.generators.Base);
+util.inherits(Generator, yeoman.generators.Base);
 
 Generator.prototype.askFor = function askFor() {
 	// If the argument 'dont-ask' was set, return.

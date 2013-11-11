@@ -1,7 +1,7 @@
 'use strict';
 var util = require('util');
 var path = require('path');
-var GeneratorMain = require('./lib/generator-main.js');
+var GeneratorMain = require('../lib/generator-main.js');
 
 var _ = require('lodash');
 
@@ -13,8 +13,8 @@ var Generator = module.exports = function Generator(args, options, config) {
 util.inherits(Generator, GeneratorMain);
 
 Generator.prototype.setBowerFiles = function setBowerFiles() {
-	var bowerrc;
-	var bowerJSON;
+	var bowerrc = {};
+	var bowerJSON = {};
 
 	bowerJSON.dependencies = {
 	};
@@ -34,7 +34,7 @@ Generator.prototype.setBowerFiles = function setBowerFiles() {
 };
 
 Generator.prototype.setPackageFiles = function setPackageFiles() {
-	var packageJSON;
+	var packageJSON = {};
 
 	packageJSON.dependencies = {
 		"grunt": "*",
