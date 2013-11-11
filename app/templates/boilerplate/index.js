@@ -58,8 +58,10 @@ Generator.prototype.saveConfiguration = function saveConfiguration() {
 };
 
 Generator.prototype.copyBoilerplateFiles = function copyBoilerplateFiles() {
-	// Copy entire boilerplate template folder to the destination directory.
-	this.directory(this.dev.boilerplate, this.destinationRoot());
+	this.copy(path.join(this.dev.boilerplate, '404.html'), this.dir.public);
+	this.copy(path.join(this.dev.boilerplate, 'favicon.ico'), this.dir.public);
+	this.copy(path.join(this.dev.boilerplate, 'robots.txt'), this.dir.public);
+	this.copy(path.join(this.dev.boilerplate, 'styles/main.css'), this.dir.styles);
 };
 
 
