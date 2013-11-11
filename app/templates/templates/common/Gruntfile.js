@@ -1,4 +1,17 @@
 var config = require('./config/config.json');
+var pattern = {
+    js: {
+        all: './**/*.js',
+        spec: './**/*.spec.js',
+        public: path.join(config.dir.public, '/**/*.js'),
+        vendor: path.join(config.dir.vendor, '/**/*.js'),
+        scripts: path.join(config.dir.scripts, '/**/*.js'),
+        test: path.join(config.dir.test, '/**/*.js')
+    },
+    styles: {
+        all: path.join(config.dir.styles, '/**/*.css')
+    }
+};
 
     //
     //
@@ -20,8 +33,8 @@ module.exports = function(grunt) {
         watch: {
             js: {
                 files: [
-                    './**/*.js', 
-                    "!" + config.dir.vendor + "**", 
+                    pattern.js.all, 
+                    "!" + pattern.js.vendor, 
                     '!**/node_modules/**'
                 ],
                 tasks: ['jshint'],
@@ -30,13 +43,13 @@ module.exports = function(grunt) {
                 },
             },
             css: {
-                files: [config.dir.styles + '/**'],
+                files: [pattern.styles.all],
                 options: {
                     livereload: true
                 }
             },
             karma: {
-                files: ['**/*.spec.js'],
+                files: [pattern.js.spec],
                 tasks: ['karma:unit:run'],
                 options: {
                     livereload: true
@@ -63,13 +76,12 @@ module.exports = function(grunt) {
                 'Gruntfile.js'
             ],
             public: [
-                config.dir.public + '/**/*.js', 
-                "!" + config.dir.vendor + '/**/*.js'
+                pattern.js.all, 
+                "!" + pattern.js.vendor
             ],
             test: [
-                config.dir.test + '/**/*.js', 
-                './**/*.spec.js', 
-                config.dir.public + '/**/*.spec.js'
+                pattern.js.test, 
+                pattern.js.spec
             ]
         },
 
@@ -80,7 +92,7 @@ module.exports = function(grunt) {
                     args: [],
                     ignoredFiles: ['README.md', 'node_modules/**', config.dir.vendor + '/**', '.DS_Store'],
                     watchedExtensions: ['js'],
-                    watchedFolders: ['config', 'public'],
+                    watchedFolders: [config.dir.config, config.dir.public],
                     debug: true,
                     delayTime: 1,
                     env: {
@@ -108,9 +120,9 @@ module.exports = function(grunt) {
                     basePath: '',
                     frameworks: ['jasmine'],
                     files: [
-                        config.dir.vendor + '/**/*.js',
-                        '**/*.spec.js',
-                        config.dir.scripts + '/**/*.js'
+                        pattern.js.vendor,
+                        pattern.js.spec,
+                        pattern.js.all
                     ],
                     exclude: [
                         
@@ -122,7 +134,7 @@ module.exports = function(grunt) {
                     browsers: ['Chrome']
                 }
             }
-        },
+        }
 
     });
 
