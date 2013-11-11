@@ -66,6 +66,8 @@ Generator.prototype.copyBoilerplateFiles = function copyBoilerplateFiles() {
 	this.copy(path.join(this.dev.boilerplate, 'public/favicon.ico'), path.join(this.dir.public, 'favicon.ico'));
 	this.copy(path.join(this.dev.boilerplate, 'public/robots.txt'), path.join(this.dir.public, 'robots.txt'));
 	this.copy(path.join(this.dev.boilerplate, 'public/styles/main.css'), path.join(this.dir.styles, 'main.css'));
+
+	this.copy(path.join(this.dev.boilerplate, 'public/scripts/app.js'), path.join(this.dir.scripts, 'app.js'));
 };
 
 

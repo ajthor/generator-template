@@ -83,7 +83,8 @@ Generator.prototype.copyGruntfile = function copyGruntfile() {
 };
 
 Generator.prototype.makeIndexfile = function makeIndexfile() {
-	var scripts = ['scripts/app.js'];
+	var scripts = [];
+	scripts.push(path.join(this.dir.scripts, 'app.js'));
 	this.indexFile = this.readFileAsString(path.join(this.dev.common, 'index.html'));
 	this.indexFile = this.engine(this.indexFile, this);
 
