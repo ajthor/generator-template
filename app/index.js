@@ -123,10 +123,14 @@ TemplateGenerator.prototype.copyLibraryDirectory = function copyLibraryDirectory
 };
 
 TemplateGenerator.prototype.copyTemplatesDirectory = function copyTemplatesDirectory() {
-	this.copy('templates/boilerplate/404.html');
-	this.copy('templates/boilerplate/robots.txt');
-	this.copy('templates/boilerplate/favicon.ico');
-	this.copy('templates/boilerplate/styles/main.css');
+	this.copy('templates/boilerplate/server.js');
+	this.copy('templates/boilerplate/routes.js');
+	this.copy('templates/boilerplate/routes/index.js');
+
+	this.copy('templates/boilerplate/public/404.html');
+	this.copy('templates/boilerplate/public/robots.txt');
+	this.copy('templates/boilerplate/public/favicon.ico');
+	this.copy('templates/boilerplate/public/styles/main.css');
 
 	this.copy('templates/common/Gruntfile.js');
 	this.copy('templates/common/index.html');
