@@ -1,3 +1,4 @@
+var path = require('path');
 var config = require('./config/config.json');
 var pattern = {
     js: {
@@ -79,8 +80,8 @@ module.exports = function(grunt) {
                 'Gruntfile.js'
             ],
             public: [
-                pattern.js.all,
-                pattern.not.vendor
+                pattern.not.vendor,
+                pattern.js.public
             ],
             test: [
                 pattern.js.test, 
