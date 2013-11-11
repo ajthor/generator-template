@@ -88,29 +88,29 @@ module.exports = function(grunt) {
             ]
         },
 
-        nodemon: {
-            dev: {
-                options: {
-                    file: 'server.js',
-                    args: [],
-                    ignoredFiles: ['README.md', 'node_modules/**', config.dir.vendor + '/**', '.DS_Store'],
-                    watchedExtensions: ['js'],
-                    watchedFolders: [config.dir.config, config.dir.public],
-                    debug: true,
-                    delayTime: 1,
-                    env: {
-                        PORT: config.PORT
-                    },
-                    cwd: "./"
-                }
-            }
-        },
-        concurrent: {
-            tasks: ['nodemon', 'watch'], 
-            options: {
-                logConcurrentOutput: true
-            }
-        },
+        // nodemon: {
+        //     dev: {
+        //         options: {
+        //             file: 'server.js',
+        //             args: [],
+        //             ignoredFiles: ['README.md', 'node_modules/**', config.dir.vendor + '/**', '.DS_Store'],
+        //             watchedExtensions: ['js'],
+        //             watchedFolders: [config.dir.config, config.dir.public],
+        //             debug: true,
+        //             delayTime: 1,
+        //             env: {
+        //                 PORT: config.PORT
+        //             },
+        //             cwd: "./"
+        //         }
+        //     }
+        // },
+        // concurrent: {
+        //     tasks: ['nodemon', 'watch'], 
+        //     options: {
+        //         logConcurrentOutput: true
+        //     }
+        // },
 
         //
         // Testing
@@ -144,7 +144,10 @@ module.exports = function(grunt) {
     grunt.option('force', true);
 
     //Default task.
-    grunt.registerTask('default', ['jshint', 'concurrent']);
+    grunt.registerTask('default', [
+        'jshint' 
+        // 'concurrent'
+    ]);
 
     //Test task.
     grunt.registerTask('test', ['jshint', 'karma:unit:start', 'watch']);
