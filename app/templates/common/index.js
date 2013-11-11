@@ -31,6 +31,9 @@ Generator.prototype.setBowerFiles = function setBowerFiles() {
 	bowerrc = {
 		directory: this.dir.vendor
 	};
+
+	this.write('.bowerrc', JSON.stringify(bowerrc));
+	this.write('bower.json', JSON.stringify(bowerJSON));
 };
 
 Generator.prototype.setPackageFiles = function setPackageFiles() {
@@ -53,20 +56,24 @@ Generator.prototype.setPackageFiles = function setPackageFiles() {
 		"grunt-nodemon": "*",
 		"grunt-concurrent": "*"
 	};
+
+	this.write('package.json', JSON.stringify(packageJSON));
 };
 
 Generator.prototype.setGeneralConfig = function setGeneralConfig() {
-	// this.setConfigFile(path.join(this.dir.config, 'config.js'), {
-	// 	name: this.name,
-	// 	version: this.version,
+	var configFile = {
+		name: this.name,
+		version: this.version,
 
-	// 	PORT: 3000,
+		PORT: 3000,
 		
-	// 	dir: this.dir,
-	// 	dev: this.dev,
+		dir: this.dir,
+		dev: this.dev,
 		
-	// 	components: this.components
-	// }, "module");
+		components: this.components
+	};
+
+	this.write('config/config.json', JSON.stringify(configFile));
 };
 
 Generator.prototype.copyGruntfile = function copyGruntfile() {
