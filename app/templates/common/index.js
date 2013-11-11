@@ -16,6 +16,7 @@ Generator.prototype.setBowerFiles = function setBowerFiles() {
 	var bowerrc = {};
 	var bowerJSON = {};
 
+	bowerJSON.name = this.appname;
 	bowerJSON.dependencies = {
 	};
 
@@ -39,6 +40,7 @@ Generator.prototype.setBowerFiles = function setBowerFiles() {
 Generator.prototype.setPackageFiles = function setPackageFiles() {
 	var packageJSON = {};
 
+	packageJSON.name = this.appname;
 	packageJSON.dependencies = {
 		"grunt": "*",
 		"grunt-cli": "*"
