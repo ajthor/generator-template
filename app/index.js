@@ -112,6 +112,8 @@ TemplateGenerator.prototype.copyBaseGenerators = function copyBaseGenerators() {
 	this.template('app/index.js');
 	this.template('boilerplate/index.js');
 	this.template('common/index.js');
+	
+	this.copy('common/test/common.spec.js');
 };
 
 TemplateGenerator.prototype.copyLibraryDirectory = function copyLibraryDirectory() {
