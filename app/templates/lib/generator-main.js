@@ -24,9 +24,8 @@ var Generator = module.exports = function Generator() {
 
 util.inherits(Generator, yeoman.generators.Base);
 
-_.extend(Generator.prototype, require('./util/config'));
-_.extend(Generator.prototype, require('./util/module'));
-_.extend(Generator.prototype, require('./util/express'));
-_.extend(Generator.prototype, require('./util/requirejs'));
+_.assign(Generator.prototype, require('./util/config/karma'));
+_.assign(Generator.prototype, require('./util/storage/storage'));
+
 
 
