@@ -118,10 +118,9 @@ TemplateGenerator.prototype.copyBaseGenerators = function copyBaseGenerators() {
 
 TemplateGenerator.prototype.copyLibraryDirectory = function copyLibraryDirectory() {
 	this.copy('lib/generator-main.js');
-	this.copy('lib/util/config.js');
-	this.copy('lib/util/express.js');
-	this.copy('lib/util/module.js');
-	this.copy('lib/util/requirejs.js');
+	this.copy('lib/util/config/karma.js');
+	this.copy('lib/util/storage/static.js');
+	this.copy('lib/util/storage/storage.js');
 };
 
 TemplateGenerator.prototype.copyTemplatesDirectory = function copyTemplatesDirectory() {
